@@ -1,7 +1,8 @@
 // If an ajax call generates a server error, display it to the user so that
 // errors are discovered sooner and aren't silenced and missed.
 $(document).ajaxError(function (event, request, settings, thrown_error) {
-    alert("Error: " + settings.url + " returned " + thrown_error);
+    alert("Error: " + settings.url + " returned " + thrown_error + "\n" +
+        request.responseText);
 });
 
 function get_uri_parameter_by_name(name)
