@@ -14,4 +14,4 @@ class Command(BaseCommand):
             help="The name of the button on the remote")
 
     def handle(self, *args, **options):
-        models.send_button(options["device"], options["button"])
+        models.press_button(options["device"], options["button"])

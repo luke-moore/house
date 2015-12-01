@@ -52,7 +52,7 @@ class IRError(Exception):
             message += " (errno %s)" % self.errno
         super(IRError, self).__init__(message)
 
-def send_button(device_name, button_name, repeat=1):
+def press_button(device_name, button_name, repeat=1):
     """Send the signal for the given button to the given device."""
     carrier_frequency, signals = get_iguana_signals_for_button(
         device_name, button_name, repeat)
