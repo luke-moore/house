@@ -6,12 +6,16 @@ import webapi
 import irsignal
 import huelights
 import wemo
+from . import tasks
 
 class HouseAPI(webapi.API):
     @webapi.api_method
     def press_remote(self, request, device, button):
         if not irsignal.is_busy():
-            irsignal.send_button(device, button)
+            irsignal.press_button(device, button)
+
+    def press_remote_buttons(devices_and_buttons_and_timeouts):
+        tasks.press_remote_buttons.delay(devices_and_buttons_and_timeouts)
 
     @webapi.api_method
     def set_light_scene(self, request, scene_name):
