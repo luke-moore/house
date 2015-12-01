@@ -1,0 +1,5 @@
+CELERYD_NODES="worker1"
+CELERYD_CHDIR="/var/www/django"
+CELERY_APP="housesite"
+CELERYD_USER="www-data"
+CELERYD_GROUP="www-data"
