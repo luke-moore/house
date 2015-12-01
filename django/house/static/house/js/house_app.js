@@ -14,68 +14,74 @@ angular.module('house_app', [])
         );
     }
 
-    $scope.remote_button_press = function (device, button)
+    $scope.press_remote_button = function (device, button)
     {
-	$scope.ajax_call(
-	    "press_remote",
-	    {"device": device, "button": button}
-	);
+        $scope.ajax_call(
+            "press_remote", {"device": device, "button": button});
     }
 
-    $scope.remote_button_down = function (device, button)
+    $scope.press_remote_buttons = function (devices_and_buttons_and_timeouts)
     {
-	$scope.pressed_device_and_button = [device, button];
-	function send_signal()
-	{
-	    $scope.ajax_call(
-		"press_remote",
-		{"device": device, "button": button},
-		function () {
-		    if ($scope.pressed_device_and_button[0] == device &&
-			    $scope.pressed_device_and_button[1] == button)
-			send_signal();
-		}
-	    );
-	}
-	send_signal();
+        $scope.ajax_call(
+            "press_remote_buttons",
+            {"devices_and_buttons_and_timeouts":
+                devices_and_buttons_and_timeouts});
     }
 
-    $scope.remote_button_up = function ()
+    $scope.on_remote_button_down = function (device, button)
     {
-	$scope.pressed_device_and_button = [null, null];
+        $scope.pressed_device_and_button = [device, button];
+        function send_signal()
+        {
+            $scope.ajax_call(
+                "press_remote",
+                {"device": device, "button": button},
+                function () {
+                    if ($scope.pressed_device_and_button[0] == device &&
+                            $scope.pressed_device_and_button[1] == button)
+                        send_signal();
+                }
+            );
+        }
+        send_signal();
+    }
+
+    $scope.on_remote_button_up = function ()
+    {
+        $scope.pressed_device_and_button = [null, null];
     }
 
     $scope.set_light_scene = function (scene_name)
     {
-	$scope.ajax_call("set_light_scene", {"scene_name": scene_name});
+        $scope.ajax_call("set_light_scene", {"scene_name": scene_name});
     }
 
     $scope.turn_on_switch = function (switch_name)
     {
-	$scope.ajax_call("turn_on_switch", {"switch_name": switch_name});
+        $scope.ajax_call("turn_on_switch", {"switch_name": switch_name});
     }
 
     $scope.turn_off_switch = function (switch_name)
     {
-	$scope.ajax_call("turn_off_switch", {"switch_name": switch_name});
+        $scope.ajax_call("turn_off_switch", {"switch_name": switch_name});
     }
 
     init = function() {
-	$scope.pressed_device_and_button = [null, null];
+        $scope.pressed_device_and_button = [null, null];
     }
 
     init();
 }]).directive("ngTouchstart", [function() {
     return function (scope, element, attr) {
-	element.on("touchstart mousedown", function(event) {
-	    scope.$apply(function() { scope.$eval(attr.ngTouchstart); });
-	});
+        element.on("touchstart mousedown", function(event) {
+            scope.$apply(function() { scope.$eval(attr.ngTouchstart); });
+        });
     };
 }]).directive("ngTouchend", [function() {
     return function (scope, element, attr) {
-	element.on("touchend mouseup", function(event) {
-	    scope.$apply(function() { scope.$eval(attr.ngTouchend); });
-	});
+        element.on("touchend mouseup", function(event) {
+            scope.$apply(function() { scope.$eval(attr.ngTouchend); });
+        });
     };
 }]);
 

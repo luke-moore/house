@@ -7,62 +7,66 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
   <script src="{{ STATIC_URL }}house/js/house_app.js"></script>
   <script src="{{ STATIC_URL }}house/js/util.js"></script>
+  <title>House</title>
 </head>
 
 <body ng-app="house_app" ng-controller="house_controller"
     data-apiurl="{% url "house:api" %}">
 <div class="container">
-  <button type="button" class="btn btn-default btn-lg btn-block"
+  <button class="btn btn-default btn-lg btn-block"
       ng-click="set_light_scene('Bright basement ')"
     >Basement On <span class="glyphicon glyphicon-lamp"></button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
+  <button class="btn btn-default btn-lg btn-block"
       ng-click="set_light_scene('Red basement on ')"
     >Basement Red <span class="glyphicon glyphicon-lamp"></button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
+  <button class="btn btn-default btn-lg btn-block"
       ng-click="set_light_scene('Off basement on ')"
     >Basement Off <span class="glyphicon glyphicon-eye-close"></button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
+  <button class="btn btn-default btn-lg btn-block"
       ng-click="set_light_scene('Livingroom on on')"
     >Living Room On <span class="glyphicon glyphicon-lamp"></button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
+  <button class="btn btn-default btn-lg btn-block"
       ng-click="set_light_scene('Red livingroom o')"
     >Living Room Red <span class="glyphicon glyphicon-lamp"></button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
+  <button class="btn btn-default btn-lg btn-block"
       ng-click="set_light_scene('Off livingroom o')"
     >Living Room Off <span class="glyphicon glyphicon-eye-close"></button>
   <hr>
-  <button type="button" class="btn btn-default btn-lg btn-block"
-      ng-touchstart="remote_button_down('denon-avr3806', 'volume_up')"
-      ng-touchend="remote_button_up()"
+  <button class="btn btn-default btn-lg btn-block"
+      ng-touchstart="on_remote_button_down('denon-avr3806', 'volume_up')"
+      ng-touchend="on_remote_button_up()"
     >Volume Up <span class="glyphicon glyphicon-volume-up"></span>
     </button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
-      ng-touchstart="remote_button_down('denon-avr3806', 'volume_down')"
-      ng-touchend="remote_button_up()"
+  <button class="btn btn-default btn-lg btn-block"
+      ng-touchstart="on_remote_button_down('denon-avr3806', 'volume_down')"
+      ng-touchend="on_remote_button_up()"
     >Volume Down <span class="glyphicon glyphicon-volume-down"></button>
   <hr>
-  <button type="button" class="btn btn-default btn-lg btn-block"
+  <button class="btn btn-default btn-lg btn-block"
+      ng-click="press_remote_buttons(['elitescreens', 'down', 55, 'elitescreens', 'stop']); set_light_scene('Red basement on '); turn_on_switch('Projector Switch');"
+    >Lower Screen and Turn on Projector <span class="glyphicon glyphicon-facetime-video"></button>
+  <button class="btn btn-default btn-lg btn-block"
       ng-click="turn_on_switch('Projector Switch')"
     >Projector On <span class="glyphicon glyphicon-facetime-video"></button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
+  <button class="btn btn-default btn-lg btn-block"
       ng-click="turn_off_switch('Projector Switch')"
     >Projector Power Off (Be Careful!)<span class="glyphicon glyphicon-off"></button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
-      ng-click="remote_button_press('denon-avr3806', 'tv')"
+  <button class="btn btn-default btn-lg btn-block"
+      ng-click="press_remote_button('denon-avr3806', 'tv')"
     >Chromecast <span class="glyphicon glyphicon-film"></button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
-      ng-click="remote_button_press('denon-avr3806', 'dvd')"
+  <button class="btn btn-default btn-lg btn-block"
+      ng-click="press_remote_button('denon-avr3806', 'dvd')"
     >Computer <span class="glyphicon glyphicon-blackboard"></button>
   <hr>
-  <button type="button" class="btn btn-default btn-lg btn-block"
-      ng-click="remote_button_press('elitescreens', 'up')"
-    >Screen Up <span class="glyphicon glyphicon-menu-up"></button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
-      ng-click="remote_button_press('elitescreens', 'stop')"
-    >Screen Stop <span class="glyphicon glyphicon-stop"></button>
-  <button type="button" class="btn btn-default btn-lg btn-block"
-      ng-click="remote_button_press('elitescreens', 'down')"
-    >Screen Down <span class="glyphicon glyphicon-menu-down"></button>
+  <button class="btn btn-default btn-lg btn-block"
+      ng-click="press_remote_button('elitescreens', 'up')"
+    >Start Screen Up <span class="glyphicon glyphicon-menu-up"></button>
+  <button class="btn btn-default btn-lg btn-block"
+      ng-click="press_remote_button('elitescreens', 'stop')"
+    >Stop Screen<span class="glyphicon glyphicon-stop"></button>
+  <button class="btn btn-default btn-lg btn-block"
+      ng-click="press_remote_button('elitescreens', 'down')"
+    >Start Screen Down <span class="glyphicon glyphicon-menu-down"></button>
 </div>
 </body>
 </html>
