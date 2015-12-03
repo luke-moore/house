@@ -2,6 +2,9 @@ Installation:
 -------------
 - Edit /etc/hostname and set the machine name to house.
 - aptsudo -get install apache2 libapache2-mod-wsgi mysql-server python-mysqldb openssh-server python-dev rabbitmq-server
+- The ouimeaux Python module needs to write configuration data to the home
+  directory, so create a home directory for the www-data user:
+mkdir /home/www-data && chown www-data:www-data /home/www-data && /etc/init.d/apache2 stop && usermod -d /home/www-data www-data && /etc/init.d/apache2 start
 - sudo pip install django==1.8
 - sudo pip install psutil
 - sudo pip install celery
